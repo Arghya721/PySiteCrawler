@@ -2,12 +2,15 @@
 
 import os
 import re
+import time
 from urllib.parse import urlparse, urljoin
 import html2text
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 
 class WebUtils:
@@ -19,12 +22,22 @@ class WebUtils:
         return driver.page_source
 
     @staticmethod
-    def start_driver(path):
+    def start_geckodriver(path):
         """Start a Selenium driver"""
-        service = Service(path)
+        service = FirefoxService(path)
         options = Options()
         options.headless = True
         driver = webdriver.Firefox(service=service, options=options)
+        return driver
+    
+    @staticmethod
+    def start_chromiumdriver(path):
+        """Start a Selenium driver"""
+        service = ChromeService(executable_path=path)
+        options = ChromeOptions()
+        options.headless = True
+        options.add_argument("--start-maximized")
+        driver = webdriver.Chrome(service=service, options=options)
         return driver
 
     @staticmethod
