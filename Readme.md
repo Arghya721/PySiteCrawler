@@ -4,12 +4,13 @@ PySiteCrawler is a Python library designed for web crawling and data extraction,
 
 ## Features
 
-• Breadth-First Search Crawling: Seamlessly traverse websites using a breadth-first search strategy.
+- Breadth-First Search Crawling: Seamlessly traverse websites using a breadth-first search strategy.
 
-• Text Extraction: Extract text content and titles from HTML pages for further analysis.
+- Depth-First Search Crawling: Efficiently explore websites using a depth-first search strategy.
 
-• Link Management: Collect and manage links during crawling for comprehensive exploration.
-  Headless Browsing: Use either GeckoDriver or ChromeDriver for headless browsing.
+- Text Extraction: Extract text content and titles from HTML pages for further analysis.
+
+- Headless Browsing: Use either GeckoDriver or ChromeDriver for headless browsing.
 
 
 ## Prerequisites
@@ -30,6 +31,24 @@ You can easily install PySiteCrawler using pip:
 pip install PySiteCrawler
 ```
 
+## Classes and Functions
+
+### BFSWebCrawler
+
+The `BFSWebCrawler` class provides the following functions and methods:
+
+- `__init__(base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=False)`: Initialize the BFSWebCrawler instance.
+- `crawl()`: Perform a breadth-first search crawl on the specified website.
+
+
+### DFSWebCrawler
+
+The `DFSWebCrawler` class provides the following functions and methods:
+
+- `__init__(base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=False)`: Initialize the BFSWebCrawler instance.
+- `crawl()`: Perform a breadth-first search crawl on the specified website.
+
+
 ## Usage
 
 Here's a quick example of how to use PySiteCrawler to perform a breadth-first search crawl on a website:
@@ -46,13 +65,24 @@ crawler.crawl()
 You can also specify the chromedriver_path parameter during initialization to use the ChromeDriver for crawling. (It is suggested to use the geckodriver as chromedriver causes some issue in loading the website correctly in headless mode)
 
 ```bash
-from PySiteCrawler.crawler.bfs_web_crawler import BFSWebCrawler
+from PySiteCrawler.crawler.dfs_web_crawler import DFSWebCrawler
 
-# Initialize a BFSWebCrawler
-crawler = BFSWebCrawler("https://example.com", max_depth=2,
+# Initialize a DFSWebCrawler
+crawler = DFSWebCrawler("https://example.com", max_depth=2,
                          chromedriver_path=r"path/to/chromedriver")
 crawler.crawl()
 ```
+
+### Parameters
+
+- `base_url`: The starting URL for web crawling.
+- `max_depth` (optional): The maximum depth of crawling. Default is None (no limit).
+- `geckodriver_path` (optional): Path to GeckoDriver executable for Firefox. Default is None (uses ChromeDriver).
+- `chromedriver_path` (optional): Path to ChromeDriver executable for Chrome. Default is None (uses GeckoDriver).
+- `headless` (optional): If `True`, the browser will run in headless mode (no GUI display). If `False`, the browser GUI will be visible. Default is `True`.
+
+> **Note**: The `base_url` parameter and either `geckodriver_path` or `chromedriver_path` are necessary for PySiteCrawler to work correctly. Specify the appropriate WebDriver path based on your preferred browser automation. If `geckodriver_path` is provided, GeckoDriver will be used by default. If `chromedriver_path` is provided, ChromeDriver will be used for crawling. It is suggested to use GeckoDriver, as ChromeDriver may cause issues in loading websites correctly in headless mode.
+
 
 ## Contribution
 

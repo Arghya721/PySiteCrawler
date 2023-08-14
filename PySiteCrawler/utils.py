@@ -22,20 +22,20 @@ class WebUtils:
         return driver.page_source
 
     @staticmethod
-    def start_geckodriver(path):
+    def start_geckodriver(path , headless):
         """Start a Selenium driver"""
         service = FirefoxService(path)
         options = Options()
-        options.headless = True
+        options.headless = headless
         driver = webdriver.Firefox(service=service, options=options)
         return driver
     
     @staticmethod
-    def start_chromiumdriver(path):
+    def start_chromiumdriver(path , headless):
         """Start a Selenium driver"""
         service = ChromeService(executable_path=path)
         options = ChromeOptions()
-        options.headless = True
+        options.headless = headless
         options.add_argument("--start-maximized")
         driver = webdriver.Chrome(service=service, options=options)
         return driver

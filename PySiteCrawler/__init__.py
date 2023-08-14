@@ -1,1 +1,2 @@
 from PySiteCrawler.crawler.bfs_web_crawler import BFSWebCrawler
+from PySiteCrawler.crawler.dfs_web_crawler import DFSWebCrawler

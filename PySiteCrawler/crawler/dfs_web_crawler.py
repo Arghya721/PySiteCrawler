@@ -1,15 +1,13 @@
-"""web crawler using breadth-first search"""
+"""web crawler using depth-first search"""
 
-from collections import deque
 from PySiteCrawler.utils import WebUtils
 
-
-class BFSWebCrawler:
+class DFSWebCrawler:
     """
-    A web crawler that uses breadth-first search to crawl the web.
+    A web crawler that uses depth-first search to crawl the web.
     """
 
-    def __init__(self, base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None , headless=True):
+    def __init__(self, base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=True):
         self.base_url = base_url
         self.max_depth = max_depth
         self.geckodriver_path = geckodriver_path
@@ -26,10 +24,22 @@ class BFSWebCrawler:
         links = WebUtils.get_links_from_html(content, url)
         return links
     
+    def __dfs(self, driver, url, depth, visited_urls):
+        """
+        Perform a depth-first search on the website.
+        """
+
+        if self.max_depth is not None and depth > self.max_depth:
+            return
+
+        links = self.__website_processor(driver, url)
+        for link in links:
+            if link not in visited_urls:
+                visited_urls.add(link)
+                self.__dfs(driver, link, depth + 1, visited_urls)
+    
     def crawl(self):
-        """
-        Perform a breadth-first search on the website.
-        """
+        """crawl the website"""
         try:
             driver = None
             if self.geckodriver_path is None:
@@ -37,18 +47,9 @@ class BFSWebCrawler:
             elif self.chromedriver_path is None:
                 driver = WebUtils.start_geckodriver(path=self.geckodriver_path , headless=self.headless)
             visited_urls = set()
-            queue = deque([(self.base_url, 0)])
             visited_urls.add(self.base_url)
-            while queue:
-                url, depth = queue.popleft()
-                if self.max_depth is not None and depth > self.max_depth:
-                    break
-                links = self.__website_processor(driver, url)
-                for link in links:
-                    if link not in visited_urls:
-                        queue.append((link, depth + 1))
-                        visited_urls.add(link)
-
+            self.__dfs(driver, self.base_url, 0, visited_urls)
+        
         except Exception as exception:
             print("An error occurred:", exception)
         
