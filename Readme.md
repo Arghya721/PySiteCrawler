@@ -1,7 +1,6 @@
 # PySiteCrawler - A Simple Web Crawling Library
 
-PySiteCrawler is a Python library designed for web crawling and data extraction,  offering a simple and efficient way to explore web pages, extract text content, and manage links during the crawling process. The library is designed to provide versatile traversal methods, with additional traversal strategies planned for future updates.
-
+PySiteCrawler is a Python library designed for web crawling and data extraction, offering a simple and efficient way to explore web pages, extract text content, and manage links during the crawling process. The library is designed to provide versatile traversal methods, with additional traversal strategies planned for future updates. All scraped data is conveniently stored in .txt files for easy access and analysis.
 
 ## Features
 
@@ -15,11 +14,13 @@ PySiteCrawler is a Python library designed for web crawling and data extraction,
 
 ## Prerequisites
 
-Before using PySiteCrawler, ensure that you have set up the appropriate WebDriver for your preferred browser:
+Before using PySiteCrawler, ensure that you have the following prerequisites in place:
 
-- **GeckoDriver**: For Firefox browser automation, download the latest GeckoDriver from [here](https://github.com/mozilla/geckodriver/releases) and make sure it is available in your system's PATH.
+- **Python**: PySiteCrawler requires Python (version 3.6 or higher). You can download the latest version of Python from [here](https://www.python.org/downloads/).
 
-- **ChromeDriver**: For Chrome browser automation, download the latest ChromeDriver from [here](https://chromedriver.chromium.org/downloads) and make sure it is available in your system's PATH.
+- **WebDriver Setup**:
+  - **GeckoDriver**: For Firefox browser automation, download the latest GeckoDriver from [here](https://github.com/mozilla/geckodriver/releases) and make sure it is available in your system's PATH.
+  - **ChromeDriver**: For Chrome browser automation, download the latest ChromeDriver from [here](https://chromedriver.chromium.org/downloads) and make sure it is available in your system's PATH.
 
 ## Installation
 
@@ -56,7 +57,3 @@ crawler.crawl()
 ## Contribution
 
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
-
-
-
-
