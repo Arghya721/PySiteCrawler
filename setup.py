@@ -11,7 +11,7 @@ with open(str(ROOT_DIR / "Readme.md")) as readme:
 
 setup(
     name='PySiteCrawler',
-    version='0.1.0',
+    version='0.1.1',
     description='A web crawler that uses graph traversal algorithms to crawl the web.',
     long_description=long_description,
     long_description_content_type="text/markdown",
