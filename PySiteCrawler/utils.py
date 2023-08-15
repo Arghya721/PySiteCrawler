@@ -2,7 +2,6 @@
 
 import os
 import re
-import time
 from urllib.parse import urlparse, urljoin
 import html2text
 from bs4 import BeautifulSoup

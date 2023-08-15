@@ -45,8 +45,8 @@ The `BFSWebCrawler` class provides the following functions and methods:
 
 The `DFSWebCrawler` class provides the following functions and methods:
 
-- `__init__(base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=False)`: Initialize the BFSWebCrawler instance.
-- `crawl()`: Perform a breadth-first search crawl on the specified website.
+- `__init__(base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=False)`: Initialize the DFSWebCrawler instance.
+- `crawl()`: Perform a depth-first search crawl on the specified website.
 
 
 ## Usage
