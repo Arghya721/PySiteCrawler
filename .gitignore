@@ -5,3 +5,6 @@ PySiteCrawler.egg-info
 dist
 build
 script.bat
+merge.py
+merged_file.txt
+python.langchain.com

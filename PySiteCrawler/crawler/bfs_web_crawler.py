@@ -9,14 +9,14 @@ class BFSWebCrawler:
     A web crawler that uses breadth-first search to crawl the web.
     """
 
-    def __init__(self, base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None , headless=True):
+    def __init__(self, base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=True):
         self.base_url = base_url
         self.max_depth = max_depth
         self.geckodriver_path = geckodriver_path
         self.chromedriver_path = chromedriver_path
         self.headless = headless
 
-    def __website_processor(self , driver, url):
+    def __website_processor(self, driver, url):
         """
         Process the website.
         """
@@ -33,9 +33,9 @@ class BFSWebCrawler:
         try:
             driver = None
             if self.geckodriver_path is None:
-                driver = WebUtils.start_chromiumdriver(path=self.chromedriver_path , headless=self.headless)
+                driver = WebUtils.start_chromiumdriver(path=self.chromedriver_path, headless=self.headless)
             elif self.chromedriver_path is None:
-                driver = WebUtils.start_geckodriver(path=self.geckodriver_path , headless=self.headless)
+                driver = WebUtils.start_geckodriver(path=self.geckodriver_path, headless=self.headless)
             visited_urls = set()
             queue = deque([(self.base_url, 0)])
             visited_urls.add(self.base_url)

@@ -10,6 +10,7 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+import uuid
 
 
 class WebUtils:
@@ -21,7 +22,7 @@ class WebUtils:
         return driver.page_source
 
     @staticmethod
-    def start_geckodriver(path , headless):
+    def start_geckodriver(path, headless):
         """Start a Selenium driver"""
         service = FirefoxService(path)
         options = Options()
@@ -30,7 +31,7 @@ class WebUtils:
         return driver
     
     @staticmethod
-    def start_chromiumdriver(path , headless):
+    def start_chromiumdriver(path, headless):
         """Start a Selenium driver"""
         service = ChromeService(executable_path=path)
         options = ChromeOptions()
@@ -71,10 +72,11 @@ class WebUtils:
         Save the text as a .txt file.
         """
         sanitized_title = WebUtils.sanitize_filename(title)
+        filename = sanitized_title + str(uuid.uuid1())
         base_url = urlparse(base_url).netloc
         if not os.path.exists(base_url):
             os.makedirs(base_url)
-        with open(f"{base_url}/{sanitized_title}.txt", "w", encoding="utf-8") as f:
+        with open(f"{base_url}/{filename}.txt", "w", encoding="utf-8") as f:
             f.write(text)
 
     @staticmethod
