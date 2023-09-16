@@ -52,7 +52,7 @@ class WebUtils:
         title = soup.title.string.strip() if soup.title else "untitled"
         print("Processing:", title)
         text_converter = html2text.HTML2Text()
-        text_converter.ignore_links = True
+        text_converter.ignore_links = False
         text_converter.body_width = 0
         text_converter.skip_internal_links = True
         text_converter.ignore_images = True

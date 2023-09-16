@@ -73,6 +73,14 @@ crawler = DFSWebCrawler("https://example.com", max_depth=2,
 crawler.crawl()
 ```
 
+You can get all the text for all the visited page using website_text dictionary.
+
+```
+text = crawler.website_text["https://example.com"]
+```
+
+Pass the base url to get all the crawled website text data.
+
 ### Parameters
 
 - `base_url`: The starting URL for web crawling.
@@ -80,6 +88,7 @@ crawler.crawl()
 - `geckodriver_path` (optional): Path to GeckoDriver executable for Firefox. Default is None (uses ChromeDriver).
 - `chromedriver_path` (optional): Path to ChromeDriver executable for Chrome. Default is None (uses GeckoDriver).
 - `headless` (optional): If `True`, the browser will run in headless mode (no GUI display). If `False`, the browser GUI will be visible. Default is `True`.
+- `disable_file_generation`(optional): If `False`, all the text content for each visited page will be stored into a .txt file. Default is `False`. 
 
 > **Note**: The `base_url` parameter and either `geckodriver_path` or `chromedriver_path` are necessary for PySiteCrawler to work correctly. Specify the appropriate WebDriver path based on your preferred browser automation. If `geckodriver_path` is provided, GeckoDriver will be used by default. If `chromedriver_path` is provided, ChromeDriver will be used for crawling. It is suggested to use GeckoDriver, as ChromeDriver may cause issues in loading websites correctly in headless mode.
 
