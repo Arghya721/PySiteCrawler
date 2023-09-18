@@ -48,6 +48,7 @@ The `DFSWebCrawler` class provides the following functions and methods:
 - `__init__(base_url, geckodriver_path=None, chromedriver_path=None, max_depth=None, headless=False)`: Initialize the DFSWebCrawler instance.
 - `crawl()`: Perform a depth-first search crawl on the specified website.
 
+**Note: The Selenium driver used for crawling has a default timeout of 10 seconds per page.**
 
 ## Usage
 

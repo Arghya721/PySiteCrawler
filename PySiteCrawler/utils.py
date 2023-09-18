@@ -2,6 +2,7 @@
 
 import os
 import re
+import uuid
 from urllib.parse import urlparse, urljoin
 import html2text
 from bs4 import BeautifulSoup
@@ -10,16 +11,23 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-import uuid
+from selenium.common.exceptions import TimeoutException
 
 
 class WebUtils:
     """Utility functions for web scraping"""
     @staticmethod
     def get_page_content(driver, url):
-        """Get the content of a webpage using Selenium"""
-        driver.get(url)
-        return driver.page_source
+        """Get the content of a webpage using Selenium with a timeout"""
+        driver.set_page_load_timeout(10)
+
+        try:
+            driver.get(url)
+            return driver.page_source
+
+        except TimeoutException:
+            print(f"Navigation timed out while loading {url}")
+            return ""
 
     @staticmethod
     def start_geckodriver(path, headless):
@@ -27,9 +35,10 @@ class WebUtils:
         service = FirefoxService(path)
         options = Options()
         options.headless = headless
-        driver = webdriver.Firefox(service=service, options=options)
+        driver = webdriver.Firefox(
+            service=service, options=options)
         return driver
-    
+
     @staticmethod
     def start_chromiumdriver(path, headless):
         """Start a Selenium driver"""
@@ -50,7 +59,6 @@ class WebUtils:
         """Extract text and title from HTML content"""
         soup = BeautifulSoup(content, 'html.parser')
         title = soup.title.string.strip() if soup.title else "untitled"
-        print("Processing:", title)
         text_converter = html2text.HTML2Text()
         text_converter.ignore_links = False
         text_converter.body_width = 0
